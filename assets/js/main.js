@@ -22,6 +22,27 @@
   document.addEventListener('scroll', toggleScrolled);
   window.addEventListener('load', toggleScrolled);
 
+  document.addEventListener('contextmenu', (event) => event.preventDefault());
+  let devtoolsOpen = false;
+
+    const checkDevTools = () => {
+        const before = performance.now();
+        debugger; // This statement pauses execution when DevTools is open
+        const after = performance.now();
+
+        if (after - before > 100) {
+            if (!devtoolsOpen) {
+                devtoolsOpen = true;
+                alert('Developer tools are open. Access is restricted!');
+                // Optional: Redirect the user or take additional actions
+            }
+        } else {
+            devtoolsOpen = false;
+        }
+    };
+
+    setInterval(checkDevTools, 1000);
+
   /**
    * Mobile nav toggle
    */
